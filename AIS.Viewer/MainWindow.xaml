@@ -1,0 +1,49 @@
+﻿<Window x:Class="AIS.Viewer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:m="clr-namespace:Microsoft.Maps.MapControl.WPF;assembly=Microsoft.Maps.MapControl.WPF" 
+        xmlns:local="clr-namespace:AIS.Viewer"
+        mc:Ignorable="d"
+        Loaded="Window_Loaded"
+        Title="MainWindow" Height="700" Width="1100">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.1*"/>
+            <RowDefinition Height="0.8*"/>
+            <RowDefinition Height="0.1*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.1*"/>
+            <ColumnDefinition Width="0.7*"/>
+            <ColumnDefinition Width="0.2*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2">
+            <StackPanel Orientation="Horizontal" Height="30">
+                <Label Content="Observation point (lat, lon)" Margin="2"/>
+                <TextBox Width="90" Text="{Binding ObservationPointLatitude, FallbackValue=35.89166667}" Margin="2" VerticalContentAlignment="Center"/>
+                <TextBox Width="90" Text="{Binding ObservationPointLongitude, FallbackValue=14.50750000}" Margin="2" VerticalContentAlignment="Center"/>
+                <Separator  BorderThickness="4" BorderBrush="Black" Margin="4"/>
+                <Label Content="Listen on port" Margin="2"/>
+                <TextBox Width="90" Text="{Binding ListenOnPort, FallbackValue=12345}" Margin="2" VerticalContentAlignment="Center"/>
+                <Separator  BorderThickness="4" BorderBrush="Black" Margin="4"/>
+                <Button Name="btnStart" Content="Start" Width="80" Foreground="Green" Background="White" Click="BtnStart_Click" Height="25" VerticalAlignment="Top" Margin="2"
+                        IsEnabled="{Binding CanStart, Mode=OneWay}"/>
+                <Button Name="btnStop" Content="Stop" Width="80" Foreground="Red" Background="White" Click="BtnStop_Click"  Height="25" VerticalAlignment="Top" Margin="2"
+                        IsEnabled="{Binding CanStop, Mode=OneWay}"/>
+                <Separator  BorderThickness="4" BorderBrush="Black" Margin="4"/>
+                <Ellipse Width="30" Height="30" Fill="Green" Visibility="{Binding ReceptionEllipse, Mode=OneWay}"/>
+            </StackPanel>
+        </Grid>
+        <m:Map Name="map" Grid.Row="1" Grid.Column="1"
+               CredentialsProvider="CRdUUlcW9zaBiOBGZU73~gNdUOOCYZbTbis6l8bGZBw~Ah6fVAraogI0RJSOQoReX9EK863UflWuA1SXf4D9tZ2I_9z75rfS_22Solol6HxV"
+               Center="35.89166667, 14.50750000" ZoomLevel="{Binding ZoomValue, FallbackValue=14}"/>
+        <Grid Grid.Row="1" Grid.Column="0">
+            <StackPanel>
+                <Button Name="btnZoomOut" Click="BtnZoomOut_Click" Height="35" FontSize="25" Margin="10" Content="Out" />
+                <Button Name="btnZoomIn" Click="BtnZoomIn_Click" Height="35" FontSize="25" Margin="10" Content="In" />
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>
