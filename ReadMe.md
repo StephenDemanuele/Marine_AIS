@@ -35,24 +35,24 @@ Specifically, these steps:
 
 ## Projects in the solution.
 
-### AIS.Parser
+#### AIS.Parser
 Contains most of the business end of AIS sentence processing. Together, the `NMEASentenceListener`, `PacketFactory` and `NMEASentenceProcessor` listen to AIS data published to a speific IP:port, then parse the AIS data, process it, update state (a `VesselCollection` instance) and publish new events. `NMEASentenceProcessor` orchestrates all this.
 
-### AIS.WebApi
+#### AIS.WebApi
 An API application, which by using an instance of `AIS.Parser.NMEASentenceProcessor`, providers access to the gathered data over HTTP Rest.
 eg. GET /api/vessels/headers => returns a description of vessels tracked since started
 eg. GET /api/vessels/{{userid}} => returns a detailed description of the vessel having {{userid}}
 
-### AIS.Viewer
+#### AIS.Viewer
 A WPF application, which uses an instance of `AIS.Parser.NMEASentenceProcessor` and BingMaps to show tracked vessels on a map, in realtime.
 
-### AIS.WebViewer
+#### AIS.WebViewer
 A React.js app, which uses an instance of `AIS.Parser.NMEASentenceProcessor` and ReactBingMaps to show tracked vessels on a map, in realtime.
 
-### AIS.GPSReader
+#### AIS.GPSReader
 You have a GPS dongle? Use this project to parse the GPS signal and pipe its input into the `AIS.Parser`, instead of manually keying in your Observation Point.
 
-### AIS.FakeTransmission
+#### AIS.FakeTransmission
 You do not have an SDR dongle, or out of reach of AIS transmissions? Run this project together with any of the viewers of the API, and you'll process the fake AIS data.
 
 ## Dependencies.
